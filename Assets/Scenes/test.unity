@@ -362,11 +362,12 @@ Transform:
   m_GameObject: {fileID: 1156513326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9, y: -4.96, z: 0}
+  m_LocalPosition: {x: -0.9, y: -3.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 134918068}
+  - {fileID: 1651155786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1156513328
@@ -410,6 +411,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1156513328}
   moveSpeed: 8
+  jumpForce: 20
+  groundPoint: {fileID: 1651155786}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1169937714
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +430,7 @@ GameObject:
   - component: {fileID: 1169937718}
   - component: {fileID: 1169937717}
   - component: {fileID: 1169937716}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1567,6 +1573,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1651155785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1651155786}
+  m_Layer: 0
+  m_Name: GroundPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1651155786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651155785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.486, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1156513327}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1890362511
 GameObject:
   m_ObjectHideFlags: 0
