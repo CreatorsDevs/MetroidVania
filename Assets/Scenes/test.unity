@@ -438,6 +438,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 134918071}
 --- !u!1 &1169937714
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround;
     public LayerMask whatIsGround;
 
+    public Animator anim;
+
     void Start()
     {
         
@@ -29,5 +31,11 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+
+
+
+
+        anim.SetBool("isOnGround", isOnGround);
+        anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
     }
 }
