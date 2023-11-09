@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 12
   rb: {fileID: 1431434798548727174}
+  impactEffect: {fileID: 4047628944027295378, guid: f6c70c67fe4fb5e4b8b0d37b34ad3e7c, type: 3}
   moveDir: {x: 1, y: 0}
 --- !u!58 &2400178139981034338
 CircleCollider2D:
