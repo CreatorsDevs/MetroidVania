@@ -230,8 +230,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 363991487
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7815371044791450175, guid: 3607ff319a5a56141aa94c66e33ca304, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -531,10 +531,15 @@ MonoBehaviour:
   shotPoint: {fileID: 1974067482}
   dashSpeed: 25
   dashTime: 0.2
+  sr: {fileID: 134918070}
+  afterImage: {fileID: 8485968988653279240, guid: b6ba850f4fbc40f408fb595c7dba6375, type: 3}
+  afterImageLifeTime: 0.5
+  timeBetweenAfterImages: 0.03333334
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   anim: {fileID: 134918071}
+  afterImageColor: {r: 0.63424706, g: 0.4705055, b: 0.9339623, a: 0.78431374}
 --- !u!1 &1169937714
 GameObject:
   m_ObjectHideFlags: 0

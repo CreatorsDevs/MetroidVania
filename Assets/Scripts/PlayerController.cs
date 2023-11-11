@@ -9,14 +9,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BulletController shotToFire;
     [SerializeField] private Transform shotPoint;
     [SerializeField] private float dashSpeed, dashTime;
-
-    
+    [SerializeField] private SpriteRenderer sr, afterImage;
+    [SerializeField] private float afterImageLifeTime, timeBetweenAfterImages;
+   
     public LayerMask whatIsGround;
     public Animator anim;
+    public Color afterImageColor;
 
     private bool isOnGround;
     private bool canDoubleJump;
     private float dashCounter;
+    private float afterImageCounter;
 
     void Start()
     {
@@ -28,12 +31,19 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Fire2"))
         {
             dashCounter = dashTime;
+            ShowAfterImage();
         }
 
         if (dashCounter > 0)
         {
             dashCounter = dashCounter - Time.deltaTime;
             rb.velocity = new Vector2(dashSpeed * transform.localScale.x, rb.velocity.y);
+
+            afterImageCounter -= Time.deltaTime;
+            if(afterImageCounter <= 0)
+            {
+                ShowAfterImage();
+            }
         }
         else
         {
@@ -79,5 +89,17 @@ public class PlayerController : MonoBehaviour
         // Animation controllers
         anim.SetBool("isOnGround", isOnGround);
         anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+    }
+
+    private void ShowAfterImage()
+    {
+        SpriteRenderer image = Instantiate(afterImage, transform.position, transform.rotation);
+        image.sprite = sr.sprite;
+        image.transform.localScale = transform.localScale;
+        image.color = afterImageColor;
+
+        Destroy(image.gameObject, afterImageLifeTime);
+
+        afterImageCounter = timeBetweenAfterImages;
     }
 }
