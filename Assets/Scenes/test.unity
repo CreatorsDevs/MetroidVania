@@ -535,6 +535,7 @@ MonoBehaviour:
   afterImage: {fileID: 8485968988653279240, guid: b6ba850f4fbc40f408fb595c7dba6375, type: 3}
   afterImageLifeTime: 0.5
   timeBetweenAfterImages: 0.03333334
+  waitAfterDashing: 0.25
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed, dashTime;
     [SerializeField] private SpriteRenderer sr, afterImage;
     [SerializeField] private float afterImageLifeTime, timeBetweenAfterImages;
+    [SerializeField] private float waitAfterDashing;
    
     public LayerMask whatIsGround;
     public Animator anim;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool canDoubleJump;
     private float dashCounter;
     private float afterImageCounter;
+    private float dashRechargeCounter;
 
     void Start()
     {
@@ -28,15 +30,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButtonDown("Fire2"))
+        if (dashRechargeCounter > 0)
         {
-            dashCounter = dashTime;
-            ShowAfterImage();
+            dashRechargeCounter -= Time.deltaTime;
+        }
+        else
+        {
+            if (Input.GetButtonDown("Fire2"))
+            {
+                dashCounter = dashTime;
+                ShowAfterImage();
+            }
         }
 
         if (dashCounter > 0)
         {
-            dashCounter = dashCounter - Time.deltaTime;
+            dashCounter -= Time.deltaTime;
             rb.velocity = new Vector2(dashSpeed * transform.localScale.x, rb.velocity.y);
 
             afterImageCounter -= Time.deltaTime;
@@ -44,6 +53,8 @@ public class PlayerController : MonoBehaviour
             {
                 ShowAfterImage();
             }
+
+            dashRechargeCounter = waitAfterDashing;
         }
         else
         {
