@@ -529,6 +529,8 @@ MonoBehaviour:
   groundPoint: {fileID: 1651155786}
   shotToFire: {fileID: 659122949041859692, guid: c9275dd625bfa77448f01dc94c9be1d7, type: 3}
   shotPoint: {fileID: 1974067482}
+  dashSpeed: 25
+  dashTime: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
