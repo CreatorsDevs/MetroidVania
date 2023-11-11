@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer sr, afterImage;
     [SerializeField] private float afterImageLifeTime, timeBetweenAfterImages;
     [SerializeField] private float waitAfterDashing;
-   
+    [SerializeField] private GameObject standing, ball;
+    [SerializeField] private float waitToBall;
+
+
     public LayerMask whatIsGround;
     public Animator anim;
     public Color afterImageColor;
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private float dashCounter;
     private float afterImageCounter;
     private float dashRechargeCounter;
+    private float ballCounter;
 
     void Start()
     {
@@ -30,13 +34,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Dashing Ability and Movement controllers
         if (dashRechargeCounter > 0)
         {
             dashRechargeCounter -= Time.deltaTime;
         }
         else
         {
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2") && standing.activeSelf)
             {
                 dashCounter = dashTime;
                 ShowAfterImage();
@@ -95,6 +100,40 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).moveDir = new Vector2(transform.localScale.x, 0f);
             anim.SetTrigger("shotFired");
+        }
+
+        // Ball State - State Change Ability
+        if(!ball.activeSelf)
+        {
+            if(Input.GetAxisRaw("Vertical") < -0.9f)
+            {
+                ballCounter -= Time.deltaTime;
+                if(ballCounter <= 0)
+                {
+                    ball.SetActive(true);
+                    standing.SetActive(false);
+                }
+            }
+            else
+            {
+                ballCounter = waitToBall;
+            }
+        }
+        else
+        {
+            if (Input.GetAxisRaw("Vertical") > 0.9f)
+            {
+                ballCounter -= Time.deltaTime;
+                if (ballCounter <= 0)
+                {
+                    ball.SetActive(false);
+                    standing.SetActive(true);
+                }
+            }
+            else
+            {
+                ballCounter = waitToBall;
+            }
         }
 
         // Animation controllers
