@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 618674196}
   - component: {fileID: 618674197}
   - component: {fileID: 618674198}
+  - component: {fileID: 618674199}
   m_Layer: 0
   m_Name: Ball Sprite
   m_TagString: Untagged
@@ -491,6 +492,58 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.05}
   serializedVersion: 2
   m_Radius: 0.45
+--- !u!95 &618674199
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618674195}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 64457af3d797d3143ad967bb33c346c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &893615401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893615402}
+  m_Layer: 7
+  m_Name: Bomb point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &893615402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893615401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1156513327}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028193282
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +656,7 @@ Transform:
   - {fileID: 618674196}
   - {fileID: 1651155786}
   - {fileID: 1974067482}
+  - {fileID: 893615402}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1156513328
@@ -660,11 +714,14 @@ MonoBehaviour:
   standing: {fileID: 134918067}
   ball: {fileID: 618674195}
   waitToBall: 0.5
+  bombPoint: {fileID: 893615402}
+  bomb: {fileID: 1541906439531039977, guid: 6224fe3fcaeb7f24fa73e7bf075e51de, type: 3}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   anim: {fileID: 134918071}
   afterImageColor: {r: 0.63424706, g: 0.4705055, b: 0.9339623, a: 0.78431374}
+  ballAnim: {fileID: 618674199}
 --- !u!1 &1169937714
 GameObject:
   m_ObjectHideFlags: 0

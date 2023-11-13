@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float waitAfterDashing;
     [SerializeField] private GameObject standing, ball;
     [SerializeField] private float waitToBall;
+    [SerializeField] private Transform bombPoint;
+    [SerializeField] private GameObject bomb;
 
 
     public LayerMask whatIsGround;
     public Animator anim;
     public Color afterImageColor;
+    public Animator ballAnim;
 
     private bool isOnGround;
     private bool canDoubleJump;
@@ -98,8 +101,15 @@ public class PlayerController : MonoBehaviour
         // Player Shooting mechanism
         if(Input.GetButtonDown("Fire1"))
         {
-            Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).moveDir = new Vector2(transform.localScale.x, 0f);
-            anim.SetTrigger("shotFired");
+            if (standing.activeSelf)
+            {
+                Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).moveDir = new Vector2(transform.localScale.x, 0f);
+                anim.SetTrigger("shotFired");
+            }
+            else if (ball.activeSelf)
+            {
+                Instantiate(bomb, bombPoint.position, bombPoint.rotation);
+            }           
         }
 
         // Ball State - State Change Ability
@@ -137,8 +147,16 @@ public class PlayerController : MonoBehaviour
         }
 
         // Animation controllers
-        anim.SetBool("isOnGround", isOnGround);
-        anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+        if (standing.activeSelf)
+        {
+            anim.SetBool("isOnGround", isOnGround);
+            anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+        }
+
+        if(ball.activeSelf)
+        {
+            ballAnim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+        }
     }
 
     private void ShowAfterImage()
