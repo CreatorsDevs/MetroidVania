@@ -6,6 +6,9 @@ public class BombController : MonoBehaviour
 {
     [SerializeField] private float timeToExplode = 0.5f;
     [SerializeField] private GameObject explosion;
+    [SerializeField] private float blastRange;
+
+    public LayerMask whatIsDestructible;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,16 @@ public class BombController : MonoBehaviour
             }
 
             Destroy( gameObject );
+
+            Collider2D[] objectsToRemove = Physics2D.OverlapCircleAll(transform.position, blastRange, whatIsDestructible);
+
+            if(objectsToRemove.Length > 0)
+            {
+                foreach(Collider2D col in objectsToRemove)
+                {
+                    Destroy(col.gameObject);
+                }
+            }
         }
         
     }
