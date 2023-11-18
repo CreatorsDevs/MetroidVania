@@ -942,6 +942,7 @@ GameObject:
   - component: {fileID: 1156513327}
   - component: {fileID: 1156513328}
   - component: {fileID: 1156513329}
+  - component: {fileID: 1156513330}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1032,6 +1033,22 @@ MonoBehaviour:
   anim: {fileID: 134918071}
   afterImageColor: {r: 0.63424706, g: 0.4705055, b: 0.9339623, a: 0.78431374}
   ballAnim: {fileID: 618674199}
+--- !u!114 &1156513330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156513326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e50376f457a8f40916a4dc8432eeb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canDoubleJump: 0
+  canDash: 0
+  canBecomeBall: 0
+  canDropBomb: 0
 --- !u!1 &1169937714
 GameObject:
   m_ObjectHideFlags: 0
