@@ -1046,8 +1046,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDoubleJump: 0
-  canDash: 0
-  canBecomeBall: 0
+  canDash: 1
+  canBecomeBall: 1
   canDropBomb: 0
 --- !u!1 &1169937714
 GameObject:
