@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform bombPoint;
     [SerializeField] private GameObject bomb;
 
-
     public LayerMask whatIsGround;
     public Animator anim;
     public Color afterImageColor;
@@ -29,10 +28,11 @@ public class PlayerController : MonoBehaviour
     private float afterImageCounter;
     private float dashRechargeCounter;
     private float ballCounter;
+    private PlayerAbilityTracker abilities;
 
     void Start()
     {
-        
+        abilities = GetComponent<PlayerAbilityTracker>();
     }
 
     void Update()
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Fire2") && standing.activeSelf)
+            if (Input.GetButtonDown("Fire2") && standing.activeSelf && abilities.canDash)
             {
                 dashCounter = dashTime;
                 ShowAfterImage();
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, whatIsGround);
 
         // Jumping
-        if(Input.GetButtonDown("Jump") && (isOnGround || canDoubleJump))
+        if(Input.GetButtonDown("Jump") && (isOnGround || (canDoubleJump && abilities.canDoubleJump)))
         {
             if(isOnGround)
             {
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        // Player Shooting mechanism
+        // Player Shooting/Bomb dropping mechanism
         if(Input.GetButtonDown("Fire1"))
         {
             if (standing.activeSelf)
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).moveDir = new Vector2(transform.localScale.x, 0f);
                 anim.SetTrigger("shotFired");
             }
-            else if (ball.activeSelf)
+            else if (ball.activeSelf && abilities.canDropBomb)
             {
                 Instantiate(bomb, bombPoint.position, bombPoint.rotation);
             }           
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         // Ball State - State Change Ability
         if(!ball.activeSelf)
         {
-            if(Input.GetAxisRaw("Vertical") < -0.9f)
+            if(Input.GetAxisRaw("Vertical") < -0.9f && abilities.canBecomeBall)
             {
                 ballCounter -= Time.deltaTime;
                 if(ballCounter <= 0)
