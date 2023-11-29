@@ -573,7 +573,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 310882102}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9332bf2151e39cc41a76e19b963c3c41, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2096,6 +2096,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 10
+  invincibilityLength: 1.5
+  flashLength: 0.1
+  playerSprites:
+  - {fileID: 134918070}
+  - {fileID: 618674197}
 --- !u!1001 &1159937591
 PrefabInstance:
   m_ObjectHideFlags: 0
