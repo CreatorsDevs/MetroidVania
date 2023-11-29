@@ -675,6 +675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
+  destroyOnDamage: 0
+  destroyEffect: {fileID: 0}
 --- !u!1001 &434859073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1159,6 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9bae21935bdd34fa3193c8434bb678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1082377894}
 --- !u!114 &698364679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7847,7 +7850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8fbae2b9c141e41a25fb6753762d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
+  damageAmount: 3
+  destroyOnDamage: 1
+  destroyEffect: {fileID: 4206919355977005056, guid: 98857bab3d0717944a96bcf006d26543, type: 3}
 --- !u!114 &1990453346
 MonoBehaviour:
   m_ObjectHideFlags: 0
