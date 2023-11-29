@@ -15,26 +15,67 @@ public class PlayerHealthController : MonoBehaviour
     public int currentHealth;
     public int maxHealth;
 
+    public float invincibilityLength;
+    private float invincCounter;
+
+    public float flashLength;
+    private float flashCounter;
+
+    public SpriteRenderer[] playerSprites;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+
+        UIController.instance.UpdateHealth(currentHealth, maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(invincCounter > 0)
+        {
+            invincCounter -= Time.deltaTime;
+
+            flashCounter -= Time.deltaTime;
+            if(flashCounter <= 0)
+            {
+                foreach(SpriteRenderer sr in playerSprites)
+                {
+                    sr.enabled = !sr.enabled;
+                }
+                flashCounter = flashLength;
+            }
+
+            if(invincCounter <= 0)
+            {
+                foreach (SpriteRenderer sr in playerSprites)
+                {
+                    sr.enabled = true;
+                }
+                flashCounter = 0f;
+            }
+        }
     }
 
     public void DamagePlayer(int damageAmount)
     {
-        currentHealth -= damageAmount;
-
-        if(currentHealth <= 0)
+        if (invincCounter <= 0)
         {
-            currentHealth = 0;
-            gameObject.SetActive(false);
+            currentHealth -= damageAmount;
+
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                invincCounter = invincibilityLength;
+            }
+
+            UIController.instance.UpdateHealth(currentHealth, maxHealth);
         }
     }
 }
