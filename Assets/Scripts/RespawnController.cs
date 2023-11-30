@@ -9,7 +9,16 @@ public class RespawnController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
     private Vector3 respawnPoint;
@@ -45,7 +54,7 @@ public class RespawnController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         thePlayer.transform.position = respawnPoint;
-        //thePlayer.SetActive(true);
+        thePlayer.SetActive(true);
 
         PlayerHealthController.instance.FillHealth();
     }
