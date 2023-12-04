@@ -26,6 +26,8 @@ public class RespawnController : MonoBehaviour
 
     private GameObject thePlayer;
 
+    public GameObject deatheEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,11 @@ public class RespawnController : MonoBehaviour
     IEnumerator RespawnCo()
     {
         thePlayer.SetActive(false);
+
+        if(deatheEffect != null )
+        {
+            Instantiate(deatheEffect,  thePlayer.transform.position, thePlayer.transform.rotation);
+        }
         
         yield return new WaitForSeconds(waitToRespawn);
 
