@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -16,12 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float waitToBall;
     [SerializeField] private Transform bombPoint;
     [SerializeField] private GameObject bomb;
+    [SerializeField] private float shotsPerSecond;
+    [SerializeField] private float bombsPerSecond;
 
     public LayerMask whatIsGround;
     public Animator anim;
     public Color afterImageColor;
     public Animator ballAnim;
-
     private bool isOnGround;
     private bool canDoubleJump;
     private float dashCounter;
@@ -29,13 +31,16 @@ public class PlayerController : MonoBehaviour
     private float dashRechargeCounter;
     private float ballCounter;
     private PlayerAbilityTracker abilities;
+    private bool isShooting;
+    private bool isBombing;
 
     public bool canMove;
 
     void Start()
     {
         abilities = GetComponent<PlayerAbilityTracker>();
-
+        isShooting = false;
+        isBombing = false;
         canMove = true;
     }
 
@@ -105,15 +110,18 @@ public class PlayerController : MonoBehaviour
             }
 
             // Player Shooting/Bomb dropping mechanism
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
-                if (standing.activeSelf)
+                if (standing.activeSelf && !isShooting)
                 {
+                    StartCoroutine(ShootCooldown());
                     Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).moveDir = new Vector2(transform.localScale.x, 0f);
                     anim.SetTrigger("shotFired");
                 }
-                else if (ball.activeSelf && abilities.canDropBomb)
+                else if (ball.activeSelf && abilities.canDropBomb && !isBombing)
                 {
+                    Debug.Log("Bombing!");
+                    StartCoroutine(BombCooldown());
                     Instantiate(bomb, bombPoint.position, bombPoint.rotation);
                 }
             }
@@ -170,6 +178,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator ShootCooldown()
+    {
+        isShooting = true;
+        yield return new WaitForSeconds(1 / shotsPerSecond);
+        isShooting = false;
+    }
+
+    private IEnumerator BombCooldown()
+    {
+        isBombing = true;
+        yield return new WaitForSeconds(1 / bombsPerSecond);
+        isBombing = false;
+    }
+
     private void ShowAfterImage()
     {
         SpriteRenderer image = Instantiate(afterImage, transform.position, transform.rotation);
@@ -180,5 +202,15 @@ public class PlayerController : MonoBehaviour
         Destroy(image.gameObject, afterImageLifeTime);
 
         afterImageCounter = timeBetweenAfterImages;
+    }
+
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
+
+    public void DisableMovement()
+    {
+        canMove = false;
     }
 }
